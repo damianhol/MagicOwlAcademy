@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com"> 
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel&display=swap" rel="stylesheet">
+
+ <link rel="stylesheet" href="style.css">
+
+  <title>Magic Owl Academy</title>
+</head>
+
+<body>
+    <div id="instructions">
+        <div id="bg">
+            <img id="bg-img" src="./assets/bg.png" alt="">
+        </div>
+        <div id="left-info">
+            <div id="login-info">
+                <img class="username-icon" src="./assets/game/username-icon.png" alt="">
+                <p class="login-name border-square">Guest999</p>
+                <div>
+                    <img class="coin-icon" src="./assets/game/coin-icon.png" alt="">
+                <p class="coins-collected border-square">Gamedev.js Game Jam</p>
+                </div>
+                
+                <div class="btn border-square-animated">Version 1.0</div>
+            </div>
+        <div id="table-info">
+            
+            <table>
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Points</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th>MikeG</th>
+                    <td>3420</td>
+                  </tr>
+                  <tr>
+                    <th>Samanx</td>
+                    <td>3190</td>
+                  </tr>
+                  <tr>
+                    <th>Arpi03</th>
+                    <td>3070</td>
+                  </tr>
+                  <tr>
+                    <th>topGun99</th>
+                    <td>2930</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="btn border-square-animated">Have fun!</div>
+            </div>
+        </div>
+        <div id="middle-info">
+            <div class="left-info">
+                <div class="slider">
+                    <div class="arrow left-arrow">&#x25C0;</div>
+                    <div class="arrow right-arrow">&#x25B6;</div>
+                </div>
+                <div class="choose">
+                    <div class="border" id="choose-owl" style="color:rgba(255, 255, 255, 0.489);">Choose</div>
+                </div>
+                
+            </div>
+        </div>
+        <div class="right-info">
+            <div class="border" id="creditsBtn">Credits</div>
+            <div class="border" id="settingsBtn">Settings</div>
+        </div>
+
+    </div>
+    <div id="instructions2">
+      <p>You are about to embark on a thrilling,<br>
+        High-flying journey through the enchanted skies<br><br>
+        <img src="./assets/game/heart-icon.png" id="smaller-icon"/>Collect Halth Points<br>
+        <img src="./assets/game/car-icon.png" id="smaller-icon"/>Dodge Obstacles<br>
+        <img src="./assets/game/clock-icon.png" id="smaller-icon"/>Slow Down Time<br>
+        <img src="./assets/game/star-icon.png" id="smaller-icon"/>Collect Letters<br><br>
+
+        Press Space to Go Up<img src="./assets/game/space-icon.png" id="smaller-icon1"/><img src="./assets/game/bounce-icon.png" id="smaller-icon2"/><br>
+        Arrow Keys to Move Left and Right<img src="./assets/game/arrows-icon.png" id="smaller-icon1"/>
+
+        </p>
+    </div>
+    
+    <div id="info">
+        <div id="life">
+            <img id="lives-top-icon" src="./assets/game/heart-icon.png" /><div id="lives">3</div>
+        </div>
+        <div id="score-panel">
+            <div id="score">0</div><img src="./assets/game/star-icon.png" />
+        </div>
+    </div>
+    <div id="controls">
+      <div id="jumpBtn" class="control-btn" ></div>
+      <div id="leftBtn" class="control-btn"></div>
+      <div id="rightBtn" class="control-btn"></div>
+  </div>
+  <button id="playBtn" class="border" style="color:rgba(255, 255, 255, 0.489); display: none; position:absolute; left: 45%; top: 50%; transform: translateX(-50%); transform: translateY(-50%); background: rgba(0,0,0,0.6)">PLAY</button>
+  <button id="restartBtn" class="border" style="color:rgba(255, 255, 255, 0.489); display: none; position:absolute; left: 47%; top: 50%; transform: translateX(-50%); transform: translateY(-50%); background: rgba(0,0,0,0.6)">Go Again</button>
+  
+  <div id="settings">
+    <span id="close">×</span>
+   <p>In-game music and sound effects <input type="checkbox" name="" id="soundToggle" checked> <br></p>
+    
+    <p>Press Space to Go Up<img src="./assets/game/space-icon.png" id="smaller-icon1"/><img src="./assets/game/bounce-icon.png" id="smaller-icon2"/></p>
+    <p>Arrow Keys to Move Left and Right<img src="./assets/game/arrows-icon.png" id="smaller-icon1"/></p>
+  </div>
+
+  <div id="credits">
+    <span id="close1">×</span>
+    Music:<br> Purple Planet Music - The Magic Tree
+  </div>
+  
+
+    <p id="gameover">Game over</p>
+    <p id="castle">Level up!<br><span style="font-size: 15px;">Let's pick up some speed</span></p>
+    <img id="clock-info" src="./assets/game/clock-info.png" style="display: none; position:absolute; left: 45%; top: 50%; transform: translateX(-50%); transform: translateY(-50%); z-index: 6; opacity: 0.3;"/>
+    <script type="module">
+      import { Game } from './site/Game.js';
+  
+      var game;
+      let owlChosen = false;
+
+  
+      const images = ["./assets/game/owls/owl1.png", "./assets/game/owls/owl2.png"];
+      let currentImageIndex = 0;
+      let soundStatus = 0;
+  
+  
+      //DOM elements
+      const arrowLeft = document.querySelector('.left-arrow');
+      const arrowRight = document.querySelector('.right-arrow');
+      const chooseBtn = document.querySelector('#choose-owl');
+      const instructions = document.getElementById('instructions');
+      const instructions2 = document.getElementById('instructions2');
+      const btn = document.getElementById('playBtn');
+      const soundToggle = document.getElementById('soundToggle');
+      const close = document.getElementById('close');
+      const close1 = document.getElementById('close1');
+      const soundDialog = document.getElementById('settings');
+      const settingsBtn = document.getElementById('settingsBtn');
+      const creditsDialog = document.getElementById('credits');
+      const creditsBtn = document.getElementById('creditsBtn');
+      
+        soundDialog.style.display = 'none';
+        creditsDialog.style.display = 'none';
+
+      // Slider
+      
+      const slider = document.querySelector('.slider');
+      const img = document.createElement('img');
+      img.src = images[currentImageIndex];
+      slider.appendChild(img);
+
+      close.addEventListener('click', () => {
+        soundDialog.style.display = 'none';
+
+      })
+
+      close1.addEventListener('click', () => {
+        creditsDialog.style.display = 'none';
+      })
+
+      creditsBtn.addEventListener('click', () => {
+        creditsDialog.style.display = 'flex';
+      })
+
+      settingsBtn.addEventListener('click', () => {
+        soundDialog.style.display = 'flex';
+      })
+      
+      soundToggle.checked = true;
+
+      soundToggle.addEventListener('click', () => {
+        soundStatus = 1;
+      })
+  
+      arrowLeft.onclick = prevSlide;
+      arrowRight.onclick = nextSlide;
+  
+      chooseBtn.addEventListener('click', () => {
+          owlChosen = true;
+          const owlIndex = currentImageIndex;
+          game = new Game();
+          window.game = game;
+          game.loadOwl(`bird${owlIndex + 1}.glb`);
+          if (soundStatus) {
+            game.soundOff = true;
+          }
+          game.loadSFX();
+          instructions.style.display = 'none';
+          instructions2.style.display = 'block';
+          btn.style.display = 'block';
+      });
+  
+      function nextSlide() {
+          currentImageIndex = (currentImageIndex + 1) % images.length;
+          img.src = images[currentImageIndex];
+      }
+  
+      function prevSlide() {
+          currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+          img.src = images[currentImageIndex];
+      }
+  </script>
+  
+</body>
+
+</html>

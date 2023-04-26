@@ -1,3 +1,6 @@
+![Gamedev.js Jam 2023](https://i.ibb.co/rtZDy7n/Magic-Owl-Academy-Demo1.gif)
+
+
 ## About
 
 Developed as an entry for the Gamedev.js Jam 2023, Magic Owl Academy is inspired by the nostalgic atmosphere of classic Harry Potter: Escape the Dursleys and Robot Unicorn Run games. Built using JavaScript and Three.js, this initial release welcomes your feedback and support, which will help guide further development and improvements.
